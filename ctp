@@ -74,7 +74,7 @@ if [ "$generate_palette" = true ]; then
 	if [ ! -d "$HOME/.local/share/ctp" ]; then
 		mkdir -p "$HOME/.local/share/ctp"
 	fi
-	curl -s https://raw.githubusercontent.com/.../palette.json -o "$HOME/.local/share/ctp/palette.json"
+	curl -s https://raw.githubusercontent.com/zzampax/Catppuccin-CLI-Color-Picker/main/palette.json -o "$HOME/.local/share/ctp/palette.json"
 	echo "Palette file generated in $HOME/.local/share/ctp/palette.json"
 	exit 0
 fi
