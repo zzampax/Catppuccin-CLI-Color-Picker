@@ -66,7 +66,7 @@ if [ "$show_help" = true ]; then
 fi
 
 if [ "$show_version" = true ]; then
-	echo "ctp version 1.0"
+	echo "ctp version 1.1"
 	exit 0
 fi
 

@@ -30,7 +30,7 @@ sudo dnf install wl-clipboard jq fzf
 ```
 ## Installation
 ```bash
-git clone <repo-url>
+git clone https://github.com/zzampax/Catppuccin-CLI-Color-Picker.git
 cd Catppuccin-CLI-Color-Picker
 ./install.sh
 ```
