@@ -2,6 +2,7 @@
 ## Introduction
 This is a simple CLI color picker made with Bash that copies the selected color to the clipboard.
 It works on most of the Linux distributions (using X11 or Wayland).
+The script also runs in TTYs, but it won't copy the color to the clipboard and will only display the color code.
 It requires the following tools to work:
 - [x] xclip/wl-clipboard
 - [x] jq

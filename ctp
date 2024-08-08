@@ -66,7 +66,7 @@ if [ "$show_help" = true ]; then
 fi
 
 if [ "$show_version" = true ]; then
-	echo "ctp version 1.1"
+	echo "ctp version 1.2"
 	exit 0
 fi
 
@@ -89,10 +89,9 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
 elif [ -n "$DISPLAY" ]; then
 	clipboard_tool=xclip
 else
-	echo "No clipboard tool found"
-	exit 1
+#	echo "No graphical server found, will not copy the color to the clipboard"
+	cli_mode=true
 fi
-
 # ######################
 # # CHECK DEPENDENCIES #
 # ######################
@@ -101,18 +100,26 @@ fi
 # jq: to parse the JSON file
 # xclip or wl-clipboard: to copy the color to the clipboard
 # fzf: to select the color
-if ! command -v $clipboard_tool &> /dev/null; then
+missing_clipboard_tool=false
+missing_jq=false
+missing_fzf=false
+
+if ! [ command -v $clipboard_tool &> /dev/null ] && ! [ cli_mode ]; then
 	echo "Missind dependency: $clipboard_tool"
-	exit 1
+	missing_clipboard_tool=true
 fi
 
 if ! command -v jq &> /dev/null; then
 	echo "Missing dependency: jq"
-	exit 1
+	missing_jq=true
 fi
 
 if ! command -v fzf &> /dev/null; then
 	echo "Missing dependency: fzf"
+	missing_fzf=true
+fi
+
+if [ "$missing_clipboard_tool" = true ] || [ "$missing_jq" = true ] || [ "$missing_fzf" = true ]; then
 	exit 1
 fi
 
@@ -168,7 +175,12 @@ fi
 # The color value is in the format "#RRGGBB"
 
 color_value=$(echo "$selected_color" | cut -d ":" -f 2 | xargs)
-echo -n "$color_value" | $clipboard_tool
-echo -e "Color copied to the clipboard:\n$selected_color"
+if ! [ $cli_mode ]; then
+	echo -n "$color_value" | $clipboard_tool
+	echo -e "Color copied to the clipboard:\n$selected_color"
+else
+	clear
+	echo -e "Color selected:\n$selected_color"
+fi
 
 exit 0

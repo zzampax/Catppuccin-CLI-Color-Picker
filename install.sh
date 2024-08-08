@@ -1,7 +1,7 @@
 # Installation script for Catppuccin-CLI-Color-Picker
 # Author: ZPX
 # Date: 2024-08-07
-# Version: 1.0
+# Version: 1.2
 
 # Check if $HOME/.local/bin exists
 if [ ! -d "$HOME/.local/bin" ]; then
